@@ -12,11 +12,11 @@ namespace Business.Abstracts;
 
 public interface IProductService
 {
-    Task<IPaginate<Product>> GetListAsync();
-    Task<CreatedProductResponse> Add(CreatedProductRequest createdProductRequest);
+    Task<IPaginate<GetListProductResponse>> GetListAsync();
+    Task<CreatedProductResponse> Add(CreateProductRequest createProductRequest);
 
 }
 
-//response request pattern
+//response  pattern
 //GetListProductResponse
 

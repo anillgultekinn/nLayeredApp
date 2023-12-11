@@ -1,4 +1,5 @@
-﻿using Business.Abstracts;
+﻿using AutoMapper;
+using Business.Abstracts;
 using Business.Dtos.Requests;
 using Business.Dtos.Responses;
 using Core.DataAccess.Paging;
@@ -15,35 +16,77 @@ namespace Business.Concretes;
 public class ProductManager : IProductService
 {
     IProductDal _productDal;
+    IMapper _mapper;
 
-    public ProductManager(IProductDal productDal)
+    public ProductManager(IProductDal productDal, IMapper mapper)
     {
         _productDal = productDal;
+        _mapper = mapper;
+    }
+    public async Task<CreatedProductResponse> Add(CreateProductRequest createProductRequest)
+    {
+        //Product product = new Product(); //product oluşturuldu
+        //product.Id = Guid.NewGuid();
+        //product.ProductName = createdProductRequest.ProductName;
+        //product.UnitPrice = createdProductRequest.UnitPrice;
+        //product.QuantityPerUnit = createdProductRequest.QuantityPerUnit;
+        //product.UnitsInStock = createdProductRequest.UnitsInStock;
+        ////veritabanına atıldı
+
+        //Product createdProduct = await _productDal.AddAsync(product); //veritabanında oluşan
+
+        //CreatedProductResponse createdProductResponse = new CreatedProductResponse(); //yanıt nesnesi oluşturuldu
+        //createdProductResponse.Id = createdProduct.Id;
+        //createdProductResponse.ProductName = createdProduct.ProductName;
+        //createdProductResponse.UnitPrice = createdProduct.UnitPrice;
+        //createdProductResponse.QuantityPerUnit = createdProduct.QuantityPerUnit;
+        //createdProductResponse.UnitsInStock = createdProduct.UnitsInStock;
+        ////veritabanında oluşturulanları response atıldı ve dönüldü
+        //return createdProductResponse;
+
+
+        var product = _mapper.Map<Product>(createProductRequest);
+        var addedProduct = await _productDal.AddAsync(product);
+        var responseProduct = _mapper.Map<CreatedProductResponse>(addedProduct);
+        return responseProduct;
+
+
     }
 
-    public async Task<CreatedProductResponse> Add(CreatedProductRequest createdProductRequest)
+
+
+    //Poor Code
+    public async Task<IPaginate<GetListProductResponse>> GetListAsync()
     {
-        Product product = new Product();
-        product.Id = Guid.NewGuid();
-        product.ProductName = createdProductRequest.ProductName;
-        product.UnitPrice = createdProductRequest.UnitPrice;
-        product.QuantityPerUnit = createdProductRequest.QuantityPerUnit;
-        product.UnitsInStock = createdProductRequest.UnitsInStock;
+        var productList = await _productDal.GetListAsync();
+        var mappedList = _mapper.Map<Paginate<GetListProductResponse>>(productList);
+        return mappedList;
 
-        Product createdProduct = await _productDal.AddAsync(product);
+        //var productList = await _productDal.GetListAsync();
 
-        CreatedProductResponse createdProductResponse = new CreatedProductResponse();
-        createdProductResponse.Id = createdProduct.Id;
-        createdProductResponse.ProductName = createdProduct.ProductName;
-        createdProductResponse.UnitPrice = createdProduct.UnitPrice;
-        createdProductResponse.QuantityPerUnit = createdProduct.QuantityPerUnit;
-        createdProductResponse.UnitsInStock = createdProduct.UnitsInStock;
+        //List<GetListProductResponse> listResponseItems = new List<GetListProductResponse>();
 
-        return createdProductResponse;
-    }
+        //foreach (var product in productList.Items)
+        //{
+        //    listResponseItems.Add(new GetListProductResponse
+        //    {
+        //        Id = product.Id,
+        //        ProductName = product.ProductName,
+        //        QuantityPerUnit = product.QuantityPerUnit,
+        //        UnitPrice = product.UnitPrice,
+        //        UnitsInStock = product.UnitsInStock
+        //    });
+        //}
 
-    public Task<IPaginate<Product>> GetListAsync()
-    {
+        //Paginate<GetListProductResponse> listResponse = new Paginate<GetListProductResponse>();
+        //listResponse.Items = listResponseItems;
+        //listResponse.Count = productList.Count;
+        //listResponse.Index = productList.Index;
+        //listResponse.Size = productList.Size;
+        //listResponse.From = productList.From;
+        //listResponse.Pages = productList.Pages;
+
+        //return listResponse;
 
     }
 }

@@ -19,9 +19,9 @@ namespace WebApi.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Add([FromBody] CreatedProductRequest createdProductRequest)
+        public async Task<IActionResult> Add([FromBody] CreateProductRequest createProductRequest)
         {
-            var result = await _productService.Add(createdProductRequest);
+            var result = await _productService.Add(createProductRequest);
             return Ok(result);
         }
 

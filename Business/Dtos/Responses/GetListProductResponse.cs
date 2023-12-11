@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Business.Dtos.Responses
 {
-    public class GetListProductResponse
+    public class GetListProductResponse     
     {
         public Guid Id { get; set; }
         public string ProductName { get; set; }

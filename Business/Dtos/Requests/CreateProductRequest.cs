@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Business.Dtos.Requests
 {
-    public class CreatedProductRequest
+    public class CreateProductRequest
     {
         public string ProductName { get; set; }
         public decimal UnitPrice { get; set; }
