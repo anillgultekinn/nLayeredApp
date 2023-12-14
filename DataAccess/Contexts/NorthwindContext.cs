@@ -15,16 +15,16 @@ public class NorthwindContext : DbContext
     protected IConfiguration Configuration { get; set; }
 
     public DbSet<Product> Products { get; set; }
-    //public DbSet<Customer> Customers { get; set; }
+    public DbSet<Category> Categories { get; set; }
 
     public NorthwindContext(DbContextOptions dbContextOptions, IConfiguration configuration) : base(dbContextOptions)
     {
-        Configuration = configuration;
-        Database.EnsureCreated();
+        Configuration = configuration; //veri tabanı bağlantılarını  appsettingsten okumak için
+        //Database.EnsureCreated(); //veritabanını create etmek için
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+        modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());// konfigürasyon dosyasını bul ve onları uygula (entity congigurations)
     }
 }

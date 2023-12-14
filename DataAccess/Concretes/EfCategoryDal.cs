@@ -8,11 +8,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataAccess.Concretes;
-
-public class EfProductDal : EfRepositoryBase<Product, int, NorthwindContext>, IProductDal
+namespace DataAccess.Concretes
 {
-    public EfProductDal(NorthwindContext context) : base(context)
+    public class EfCategoryDal : EfRepositoryBase<Category, int, NorthwindContext>, ICategoryDal
     {
+        public EfCategoryDal(NorthwindContext context) : base(context)
+        {
+        }
     }
+
 }

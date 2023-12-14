@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace Entities.Concretes
 {
-    public class Customer : Entity<Guid>
+    public class Category : Entity<int>
     {
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-
+        public string Name { get; set; }
+        public List<Product> Products { get; set; } 
+        //bir kategoride birden fazla ürün var
     }
 }

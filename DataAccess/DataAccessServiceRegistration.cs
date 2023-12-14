@@ -19,10 +19,11 @@ public static class DataAccessServiceRegistration
         //services.AddDbContext<NorthwindContext>(options => options.UseInMemoryDatabase("nArchitecture"));
 
         //services.AddDbContext<BaseDbContext>(options => options.UseSqlServer(configuration.GetConnectionString("RentACar")));
-        services.AddDbContext<NorthwindContext>(options => options.UseSqlServer(configuration.GetConnectionString("ETrade")));
-        //services.AddDbContext<NorthwindContext>(options => options.UseSqlServer(configuration.GetConnectionString("Northwind")));
+        //services.AddDbContext<NorthwindContext>(options => options.UseSqlServer(configuration.GetConnectionString("ETrade")));
+        services.AddDbContext<NorthwindContext>(options => options.UseSqlServer(configuration.GetConnectionString("Northwind")));
 
         services.AddScoped<IProductDal, EfProductDal>();
+        services.AddScoped<ICategoryDal, EfCategoryDal>();
 
         return services;
     }
